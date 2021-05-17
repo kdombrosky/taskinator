@@ -14,11 +14,14 @@
     <header>
         <h1>Taskinator</h1>
         <p>Click the button below to add a new task!</p>
+
+        <!-- Form elements to accompany button -->
         <form id="task-form">
             <div class="form-group">
                 <input type="text" name="task-name" placeholder="Enter Task Name" />
             </div>
 
+            <!-- Drop down list of task types -->
             <div class="form-group">
                 <select name="task-type" class="select-dropdown">
                     <option value="" disabled selected>Pick a task type</option>
@@ -28,13 +31,14 @@
                 </select>
             </div>
             
+            <!-- Button that is called by DOM to add task -->
             <div class="form-group">
                 <button class="btn" id="save-task" type="submit">Add Task</button>
             </div>
         </form>
     </header>
 
-    
+    <!-- Tasks To Do Column -->
     <main class="page-content">
         <section class="tast-list-wrapper">
             <h2 class="list-title">Tasks To Do</h2>
