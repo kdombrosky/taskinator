@@ -131,8 +131,9 @@ var completeEditTask = function(taskName, taskType, taskId) {
 
     alert("Task Updated!");
 
-    // set button back to normal 
+    // set button back to normal, remove data attribute from form
     formEl.removeAttribute("data-task-id");
+    // update formEl button to go back to saying "Add task" instead of "Edit Task"
     formEl.querySelector("#save-task").textContent = "Add Task"; 
 };
 
@@ -146,10 +147,8 @@ var taskButtonHandler = function(event) {
     if (targetEl.matches(".edit-btn")) {
         var taskId = targetEl.getAttribute("data-task-id");
         editTask(taskId);
-    }
-
-    // delete button was clicked
-    if(event.target.matches(".delete-btn")) {
+    } // delete button was clicked
+    else if(targetEl.matches(".delete-btn")) {
         // get the element's task id
         var taskId = event.target.getAttribute("data-task-id");
         deleteTask(taskId);
@@ -171,11 +170,9 @@ var taskStatusChangeHandler = function(event) {
     
     if (statusValue === "to do") {
         tasksToDoEl.appendChild(taskSelected);
-    } 
-    else if (statusValue === "in progress") {
+    } else if (statusValue === "in progress") {
         tasksInProgressEl.appendChild(taskSelected);
-    } 
-    else if (statusValue === "completed") {
+    } else if (statusValue === "completed") {
         tasksCompletedEl.appendChild(taskSelected);
     }
 };
@@ -196,10 +193,12 @@ var editTask = function(taskId) {
     document.querySelector("input[name='task-name']").value = taskName;
     document.querySelector("select[name='task-type']").value = taskType;
 
-    // change Submit button to Save Task
-    document.querySelector("#save-task").textContent = "Save Task";
+    // set data attribute to the form with a value of the task's id so it knows which one is being edited
     formEl.setAttribute("data-task-id", taskId);
+    // change Submit button to Save Task
+    formEl.querySelector("#save-task").textContent = "Save Task";
 };
+
 
 // Function to delete task
 var deleteTask = function(taskId) {
@@ -211,5 +210,9 @@ var deleteTask = function(taskId) {
 
 // event listeners to run the functionality of the page
 formEl.addEventListener("submit", taskFormHandler);
+
+// edit and delete buttons
 pageContentEl.addEventListener("click", taskButtonHandler);
+
+// for changing the status
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
